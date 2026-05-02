@@ -1,0 +1,27 @@
+<section id="skills" class="skills section-padding" aria-labelledby="skills-title">
+  <div class="container">
+
+    <app-section-title
+      eyebrow="Tech Stack"
+      title="Tools I work with every day"
+      subtitle="A focused stack — chosen for shipping reliable enterprise software, not for chasing trends."
+    />
+
+    <div class="skills__grid">
+      @for (category of categories; track category.id; let i = $index) {
+        <article class="skills__card" appReveal [revealDelay]="i * 80">
+          <header class="skills__card-head">
+            <span class="skills__icon" aria-hidden="true">{{ category.icon }}</span>
+            <h3 class="skills__title">{{ category.title }}</h3>
+          </header>
+
+          <ul class="skills__list" [attr.aria-label]="category.title + ' skills'">
+            @for (skill of category.skills; track skill.name) {
+              <li><app-tech-badge [label]="skill.name" /></li>
+            }
+          </ul>
+        </article>
+      }
+    </div>
+  </div>
+</section>

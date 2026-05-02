@@ -1,0 +1,100 @@
+@use 'variables' as *;
+
+// =============================================================================
+// Mixins
+// =============================================================================
+
+// Responsive breakpoints (mobile-first, min-width) ----------------------------
+@mixin bp-sm  { @media (min-width: $bp-sm)  { @content; } }
+@mixin bp-md  { @media (min-width: $bp-md)  { @content; } }
+@mixin bp-lg  { @media (min-width: $bp-lg)  { @content; } }
+@mixin bp-xl  { @media (min-width: $bp-xl)  { @content; } }
+@mixin bp-2xl { @media (min-width: $bp-2xl) { @content; } }
+
+// Down (max-width) variants ---------------------------------------------------
+@mixin bp-down-md { @media (max-width: ($bp-md - 1px)) { @content; } }
+@mixin bp-down-lg { @media (max-width: ($bp-lg - 1px)) { @content; } }
+
+// Container -------------------------------------------------------------------
+@mixin container($max: $container-max) {
+  width: 100%;
+  max-width: $max;
+  margin-inline: auto;
+  padding-inline: clamp(#{$space-4}, 4vw, #{$space-8});
+}
+
+// Glass card ------------------------------------------------------------------
+@mixin glass($bg: rgba(255, 255, 255, 0.05), $border: rgba(255, 255, 255, 0.08)) {
+  background: $bg;
+  border: 1px solid $border;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+// Lift on hover ---------------------------------------------------------------
+@mixin hover-lift($y: -6px, $scale: 1) {
+  transition:
+    transform $dur-base $ease-out,
+    box-shadow $dur-base $ease-out,
+    border-color $dur-base $ease-out;
+
+  &:hover {
+    transform: translateY($y) scale($scale);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+// Focus ring ------------------------------------------------------------------
+@mixin focus-ring($color: var(--accent-primary)) {
+  outline: none;
+
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: 3px;
+    border-radius: inherit;
+  }
+}
+
+// Visually hidden (a11y) -------------------------------------------------------
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Truncate --------------------------------------------------------------------
+@mixin clamp-lines($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Gradient text ---------------------------------------------------------------
+@mixin gradient-text($from: var(--accent-primary), $to: var(--accent-secondary)) {
+  background: linear-gradient(135deg, $from 0%, $to 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+// Section padding -------------------------------------------------------------
+@mixin section-padding {
+  padding-block: clamp(#{$space-16}, 9vw, #{$space-24});
+}
+
+// Reduced motion --------------------------------------------------------------
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}

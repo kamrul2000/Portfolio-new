@@ -1,0 +1,43 @@
+<footer class="footer">
+  <div class="container footer__inner">
+
+    <div class="footer__grid">
+      <div class="footer__brand-block">
+        <a class="footer__brand" href="#home" aria-label="Back to top">
+          <span class="footer__brand-mark" aria-hidden="true">K</span>
+          <span class="footer__brand-text">{{ profile.firstName }}<span>.</span></span>
+        </a>
+        <p class="footer__tagline">
+          {{ profile.tagline }} — building scalable .NET &amp; Angular apps from Dhaka, Bangladesh.
+        </p>
+        <app-social-links variant="solid" size="sm" />
+      </div>
+
+      <div class="footer__links">
+        <h4 class="footer__heading">Navigate</h4>
+        <ul>
+          @for (item of navItems; track item.id) {
+            <li><a [href]="'#' + item.target">{{ item.label }}</a></li>
+          }
+        </ul>
+      </div>
+
+      <div class="footer__links">
+        <h4 class="footer__heading">Get in touch</h4>
+        <ul>
+          <li><a [href]="'mailto:' + profile.email">{{ profile.email }}</a></li>
+          <li><a [href]="'tel:' + profile.phone">{{ profile.phone }}</a></li>
+          <li>{{ profile.location }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__base">
+      <p>© {{ currentYear }} {{ profile.fullName }}. All Rights Reserved.</p>
+      <p class="footer__built-with">
+        Built with <span aria-hidden="true">♥</span> using Angular &amp; SCSS
+      </p>
+    </div>
+
+  </div>
+</footer>

@@ -1,0 +1,42 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// =============================================================================
+// Global responsive utilities
+// =============================================================================
+
+.container        { @include container; }
+.container-narrow { @include container($container-narrow); }
+
+.section-padding  { @include section-padding; }
+
+// Hide / show by breakpoint ---------------------------------------------------
+.hide-md-down { @include bp-down-md { display: none !important; } }
+.hide-lg-down { @include bp-down-lg { display: none !important; } }
+
+.show-md-up   { display: none; @include bp-md { display: initial; } }
+.show-lg-up   { display: none; @include bp-lg { display: initial; } }
+
+// Responsive grid helpers -----------------------------------------------------
+.grid-auto-fit {
+  display: grid;
+  gap: $space-6;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.grid-2-up {
+  display: grid;
+  gap: $space-6;
+  grid-template-columns: 1fr;
+
+  @include bp-md { grid-template-columns: repeat(2, 1fr); }
+}
+
+.grid-3-up {
+  display: grid;
+  gap: $space-6;
+  grid-template-columns: 1fr;
+
+  @include bp-md { grid-template-columns: repeat(2, 1fr); }
+  @include bp-lg { grid-template-columns: repeat(3, 1fr); }
+}

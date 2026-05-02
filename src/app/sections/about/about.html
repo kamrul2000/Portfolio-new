@@ -1,0 +1,64 @@
+<section id="about" class="about section-padding" aria-labelledby="about-title">
+  <div class="container">
+
+    <app-section-title
+      eyebrow="About Me"
+      title="A passionate full-stack engineer"
+      subtitle="Crafting reliable, scalable, and maintainable software for the enterprise."
+    />
+
+    <div class="about__grid">
+
+      <div class="about__story" appReveal>
+        <h3 class="about__heading">Who I am</h3>
+
+        <p>
+          {{ profile.summary }}
+        </p>
+
+        <p>
+          I enjoy turning complex business requirements into clean, well-structured systems —
+          owning features end-to-end from architecture and database design through to a polished
+          frontend. Outside of feature work I focus on continuous improvement: cleaner code,
+          tighter feedback loops, and better collaboration with my team.
+        </p>
+
+        <ul class="about__highlights" aria-label="What I focus on">
+          @for (item of highlights; track item) {
+            <li>
+              <span class="about__check" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+              <span>{{ item }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div class="about__cards" appReveal [revealDelay]="120">
+        <h3 class="about__heading about__heading--cards">Quick info</h3>
+
+        <ul class="about__info-grid">
+          @for (card of infoCards; track card.label) {
+            <li class="about__info-card">
+              <span class="about__info-icon" aria-hidden="true">{{ card.icon }}</span>
+              <div class="about__info-text">
+                <span class="about__info-label">{{ card.label }}</span>
+                @if (card.href) {
+                  <a class="about__info-value about__info-value--link" [href]="card.href">
+                    {{ card.value }}
+                  </a>
+                } @else {
+                  <span class="about__info-value">{{ card.value }}</span>
+                }
+              </div>
+            </li>
+          }
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>

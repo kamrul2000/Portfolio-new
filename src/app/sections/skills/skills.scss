@@ -1,0 +1,85 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.skills {
+  background: var(--bg-elevated);
+  position: relative;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-5;
+
+    @include bp-md { grid-template-columns: repeat(2, 1fr); }
+    @include bp-lg { grid-template-columns: repeat(3, 1fr); gap: $space-6; }
+  }
+
+  &__card {
+    position: relative;
+    padding: $space-6;
+    border-radius: $radius-lg;
+    background: var(--bg-base);
+    border: 1px solid var(--border-soft);
+    transition:
+      transform $dur-base $ease-out,
+      border-color $dur-base $ease-out,
+      box-shadow $dur-base $ease-out;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-card);
+      opacity: 0;
+      transition: opacity $dur-base $ease-out;
+      pointer-events: none;
+    }
+
+    &:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent-primary);
+      box-shadow: var(--shadow-md);
+    }
+
+    &:hover::after { opacity: 1; }
+
+    > * { position: relative; z-index: 1; }
+  }
+
+  &__card-head {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    margin-bottom: $space-5;
+  }
+
+  &__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: $radius-md;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    background: var(--gradient-accent);
+    color: #fff;
+    box-shadow: 0 6px 18px var(--accent-glow);
+  }
+
+  &__title {
+    font-size: $fs-md;
+    font-weight: $fw-bold;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  &__list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+    padding: 0;
+    margin: 0;
+  }
+}

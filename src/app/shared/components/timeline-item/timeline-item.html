@@ -1,0 +1,61 @@
+<li class="timeline-item" [class.timeline-item--current]="experience.current">
+  <div class="timeline-item__marker" aria-hidden="true">
+    <span class="timeline-item__dot"></span>
+    @if (experience.current) {
+      <span class="timeline-item__pulse"></span>
+    }
+  </div>
+
+  <div class="timeline-item__card">
+    <div class="timeline-item__head">
+      <div>
+        <h3 class="timeline-item__role">{{ experience.role }}</h3>
+        <p class="timeline-item__company">
+          <span>{{ experience.company }}</span>
+          @if (experience.current) {
+            <span class="timeline-item__badge">Current</span>
+          }
+        </p>
+        @if (experience.location) {
+          <p class="timeline-item__location">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            {{ experience.location }}
+          </p>
+        }
+      </div>
+
+      <span class="timeline-item__duration">{{ experience.duration }}</span>
+    </div>
+
+    <p class="timeline-item__description">{{ experience.description }}</p>
+
+    @if (experience.highlights?.length) {
+      <ul class="timeline-item__highlights" aria-label="Key projects in this role">
+        @for (group of experience.highlights; track group.title) {
+          <li class="timeline-item__highlight">
+            <h4 class="timeline-item__highlight-title">
+              <span class="timeline-item__highlight-tick" aria-hidden="true"></span>
+              {{ group.title }}
+            </h4>
+            <ul class="timeline-item__highlight-bullets">
+              @for (bullet of group.bullets; track bullet) {
+                <li>{{ bullet }}</li>
+              }
+            </ul>
+          </li>
+        }
+      </ul>
+    }
+
+    @if (experience.technologies.length) {
+      <ul class="timeline-item__tech" aria-label="Technologies used">
+        @for (tech of experience.technologies; track tech) {
+          <li><app-tech-badge [label]="tech" /></li>
+        }
+      </ul>
+    }
+  </div>
+</li>

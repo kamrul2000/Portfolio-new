@@ -1,0 +1,91 @@
+<a class="skip-link" href="#home">Skip to content</a>
+
+<header class="navbar" [class.is-scrolled]="scrolled()" [class.is-open]="menuOpen()">
+  <div class="navbar__inner container">
+
+    <a
+      class="navbar__brand"
+      href="#home"
+      (click)="goTo('home', $event)"
+      aria-label="Go to home"
+    >
+      <span class="navbar__brand-mark" aria-hidden="true">
+        <span>K</span>
+      </span>
+      <span class="navbar__brand-text">{{ profile.firstName }}<span class="navbar__brand-dot">.</span></span>
+    </a>
+
+    <nav class="navbar__nav" [class.is-open]="menuOpen()" aria-label="Primary navigation">
+      <ul class="navbar__list">
+        @for (item of navItems; track item.id) {
+          <li>
+            <a
+              class="navbar__link"
+              [class.is-active]="activeId() === item.target"
+              [href]="'#' + item.target"
+              (click)="goTo(item.target, $event)"
+            >
+              <span class="navbar__link-text">{{ item.label }}</span>
+            </a>
+          </li>
+        }
+      </ul>
+
+      <div class="navbar__mobile-cta">
+        <a
+          class="navbar__cta"
+          [href]="profile.resumePath"
+          target="_blank"
+          rel="noopener"
+          download
+          (click)="closeMenu()"
+        >
+          Download CV
+        </a>
+      </div>
+    </nav>
+
+    <div class="navbar__actions">
+      <button
+        type="button"
+        class="navbar__icon-btn"
+        (click)="toggleTheme()"
+        [attr.aria-label]="themeLabel()"
+        [attr.title]="themeLabel()"
+      >
+        <span class="navbar__icon-glyph">{{ themeIcon() }}</span>
+      </button>
+
+      <a
+        class="navbar__cta navbar__cta--desktop"
+        [href]="profile.resumePath"
+        target="_blank"
+        rel="noopener"
+        download
+      >
+        Download CV
+      </a>
+
+      <button
+        type="button"
+        class="navbar__hamburger"
+        [class.is-active]="menuOpen()"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="menuOpen()"
+        aria-label="Toggle navigation menu"
+        aria-controls="primary-nav"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div
+  class="navbar__backdrop"
+  [class.is-visible]="menuOpen()"
+  (click)="closeMenu()"
+  aria-hidden="true"
+></div>

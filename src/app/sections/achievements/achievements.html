@@ -1,0 +1,20 @@
+<section id="achievements" class="achievements section-padding" aria-labelledby="achievements-title">
+  <div class="container">
+
+    <app-section-title
+      eyebrow="Highlights"
+      title="Achievements & beyond code"
+      subtitle="Professional wins, problem-solving practice, and the team-side of being an engineer."
+    />
+
+    <div class="achievements__grid">
+      @for (item of items; track item.id; let i = $index) {
+        <article class="achievements__card" appReveal [revealDelay]="i * 70">
+          <span class="achievements__icon" aria-hidden="true">{{ item.icon }}</span>
+          <h3 class="achievements__title">{{ item.title }}</h3>
+          <p class="achievements__desc">{{ item.description }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</section>

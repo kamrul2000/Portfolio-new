@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(ng version *)",
+      "Read(//e/Kamrul/**)",
+      "Bash(ng new *)",
+      "Bash(npx ng *)",
+      "Bash(pkill -f \"ng serve\")",
+      "Bash(pkill -f \"angular\")"
+    ]
+  }
+}

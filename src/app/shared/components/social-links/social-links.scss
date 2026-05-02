@@ -1,0 +1,56 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  &__item {
+    --size: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    color: var(--text-secondary);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    transition:
+      transform $dur-base $ease-out,
+      color $dur-base $ease-out,
+      background-color $dur-base $ease-out,
+      border-color $dur-base $ease-out,
+      box-shadow $dur-base $ease-out;
+
+    @include focus-ring;
+
+    &:hover,
+    &:focus-visible {
+      color: #fff;
+      background: var(--gradient-accent);
+      border-color: transparent;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px var(--accent-glow);
+    }
+  }
+
+  &__icon {
+    display: inline-flex;
+  }
+
+  // size variants ------------------------------------------------------------
+  &--sm &__item { --size: 36px; }
+  &--lg &__item { --size: 52px; }
+
+  // solid variant ------------------------------------------------------------
+  &--solid &__item {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    border-color: var(--border-soft);
+  }
+}

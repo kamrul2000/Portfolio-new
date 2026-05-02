@@ -1,0 +1,37 @@
+<section id="education" class="education section-padding" aria-labelledby="education-title">
+  <div class="container">
+
+    <app-section-title
+      eyebrow="Education"
+      title="Academic background"
+      subtitle="Where I built my foundation in computer science and engineering."
+    />
+
+    <div class="education__grid">
+      @for (item of items; track item.id; let i = $index) {
+        <article class="education__card" appReveal [revealDelay]="i * 100">
+          <div class="education__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+            </svg>
+          </div>
+
+          <div class="education__body">
+            <p class="education__duration">{{ item.duration }}</p>
+            <h3 class="education__institution">{{ item.institution }}</h3>
+            <p class="education__degree">{{ item.degree }}</p>
+
+            @if (item.grade) {
+              <span class="education__grade">{{ item.grade }}</span>
+            }
+
+            @if (item.description) {
+              <p class="education__description">{{ item.description }}</p>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

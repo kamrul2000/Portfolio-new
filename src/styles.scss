@@ -1,0 +1,220 @@
+// =============================================================================
+// Global styles entry point
+// =============================================================================
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'animations';
+@use 'responsive';
+
+// Web fonts -------------------------------------------------------------------
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+// =============================================================================
+// Theme tokens (CSS custom properties — runtime swappable)
+// =============================================================================
+
+:root,
+:root[data-theme='dark'] {
+  // Backgrounds
+  --bg-base:        #{$navy-950};
+  --bg-elevated:    #{$navy-900};
+  --bg-surface:     #{$navy-800};
+  --bg-surface-2:   #{$navy-700};
+  --bg-overlay:     rgba(8, 12, 28, 0.72);
+
+  // Text
+  --text-primary:   #f1f4fb;
+  --text-secondary: #b6bed3;
+  --text-muted:     #7d859b;
+  --text-inverse:   #{$slate-900};
+
+  // Borders
+  --border-soft:    rgba(255, 255, 255, 0.07);
+  --border-medium:  rgba(255, 255, 255, 0.12);
+  --border-strong:  rgba(255, 255, 255, 0.22);
+
+  // Accent
+  --accent-primary:   #818cf8;
+  --accent-secondary: #22d3ee;
+  --accent-tertiary:  #a78bfa;
+  --accent-glow:      rgba(129, 140, 248, 0.35);
+
+  // Glass
+  --glass-bg:     rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+
+  // Shadows
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.55);
+  --shadow-glow: 0 0 40px rgba(129, 140, 248, 0.18);
+
+  // Gradients
+  --gradient-hero:
+    radial-gradient(circle at 18% 22%, rgba(99, 102, 241, 0.22) 0%, transparent 55%),
+    radial-gradient(circle at 82% 78%, rgba(6, 182, 212, 0.18) 0%, transparent 50%),
+    linear-gradient(180deg, #{$navy-950} 0%, #{$navy-900} 100%);
+  --gradient-accent: linear-gradient(135deg, #818cf8 0%, #22d3ee 100%);
+  --gradient-card:   linear-gradient(160deg, rgba(99, 102, 241, 0.10) 0%, rgba(34, 211, 238, 0.05) 100%);
+}
+
+:root[data-theme='light'] {
+  --bg-base:        #f7f9fd;
+  --bg-elevated:    #ffffff;
+  --bg-surface:     #ffffff;
+  --bg-surface-2:   #f0f3fa;
+  --bg-overlay:     rgba(255, 255, 255, 0.78);
+
+  --text-primary:   #0f172a;
+  --text-secondary: #3f4a63;
+  --text-muted:     #6b7488;
+  --text-inverse:   #ffffff;
+
+  --border-soft:    rgba(15, 23, 42, 0.06);
+  --border-medium:  rgba(15, 23, 42, 0.12);
+  --border-strong:  rgba(15, 23, 42, 0.22);
+
+  --accent-primary:   #4f46e5;
+  --accent-secondary: #0891b2;
+  --accent-tertiary:  #7c3aed;
+  --accent-glow:      rgba(79, 70, 229, 0.25);
+
+  --glass-bg:     rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(15, 23, 42, 0.08);
+
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 10px 28px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 24px 60px rgba(15, 23, 42, 0.14);
+  --shadow-glow: 0 0 40px rgba(79, 70, 229, 0.18);
+
+  --gradient-hero:
+    radial-gradient(circle at 18% 22%, rgba(79, 70, 229, 0.10) 0%, transparent 55%),
+    radial-gradient(circle at 82% 78%, rgba(8, 145, 178, 0.10) 0%, transparent 50%),
+    linear-gradient(180deg, #f7f9fd 0%, #eef2fb 100%);
+  --gradient-accent: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+  --gradient-card:   linear-gradient(160deg, rgba(79, 70, 229, 0.06) 0%, rgba(8, 145, 178, 0.04) 100%);
+}
+
+// =============================================================================
+// Reset / base
+// =============================================================================
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: $nav-height;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: $font-sans;
+  font-size: $fs-base;
+  line-height: 1.6;
+  font-weight: $fw-regular;
+  color: var(--text-primary);
+  background: var(--bg-base);
+  min-height: 100dvh;
+  overflow-x: hidden;
+  transition: background-color $dur-slow $ease-out, color $dur-slow $ease-out;
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color $dur-fast $ease-out;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--accent-primary);
+  color: #fff;
+}
+
+// Custom scrollbar -----------------------------------------------------------
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: $radius-pill;
+
+  &:hover { background: var(--accent-primary); }
+}
+
+// Headings -------------------------------------------------------------------
+h1, h2, h3, h4, h5, h6 {
+  font-weight: $fw-bold;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+}
+
+h1 { font-size: clamp(#{$fs-3xl}, 5.5vw, #{$fs-5xl}); font-weight: $fw-extra; letter-spacing: -0.03em; }
+h2 { font-size: clamp(#{$fs-2xl}, 4vw, #{$fs-4xl}); }
+h3 { font-size: clamp(#{$fs-xl}, 2.5vw, #{$fs-2xl}); }
+h4 { font-size: $fs-xl; }
+h5 { font-size: $fs-lg; }
+h6 { font-size: $fs-md; }
+
+p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+code, kbd, pre, samp {
+  font-family: $font-mono;
+  font-size: 0.92em;
+}
+
+// Skip link ------------------------------------------------------------------
+.skip-link {
+  position: absolute;
+  left: $space-4;
+  top: -40px;
+  padding: $space-2 $space-4;
+  background: var(--accent-primary);
+  color: #fff;
+  border-radius: $radius-sm;
+  z-index: $z-toast;
+  transition: top $dur-fast $ease-out;
+
+  &:focus {
+    top: $space-4;
+  }
+}

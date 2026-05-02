@@ -1,0 +1,12 @@
+<header class="section-title" [class.section-title--left]="align === 'left'">
+  <span class="section-title__eyebrow">
+    <span class="section-title__eyebrow-dot" aria-hidden="true"></span>
+    {{ eyebrow }}
+  </span>
+
+  <h2 class="section-title__heading">{{ title }}</h2>
+
+  @if (subtitle) {
+    <p class="section-title__subtitle">{{ subtitle }}</p>
+  }
+</header>

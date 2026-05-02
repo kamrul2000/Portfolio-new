@@ -1,0 +1,71 @@
+<section id="publications" class="publications section-padding" aria-labelledby="publications-title">
+  <div class="container container-narrow">
+
+    <app-section-title
+      eyebrow="Research"
+      title="Publications"
+      subtitle="Peer-reviewed work on machine learning and network security."
+    />
+
+    <div class="publications__list" appReveal>
+      @for (item of items; track item.id) {
+        <article class="publications__card">
+          <div class="publications__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <line x1="10" y1="9" x2="8" y2="9"/>
+            </svg>
+          </div>
+
+          <div class="publications__body">
+            <div class="publications__meta">
+              <span class="publications__venue">{{ item.venue }}</span>
+              <span class="publications__year">{{ item.year }}</span>
+            </div>
+
+            <h3 class="publications__title">{{ item.title }}</h3>
+
+            <p class="publications__authors">
+              @for (author of item.authors; track author; let last = $last) {
+                <span [class.is-self]="author.includes('Kamrul')">{{ author }}</span><!--
+                -->@if (!last) {<span class="publications__author-sep">·</span>}
+              }
+            </p>
+
+            @if (item.highlight) {
+              <p class="publications__highlight">{{ item.highlight }}</p>
+            }
+
+            <div class="publications__actions">
+              @if (item.doi) {
+                <span class="publications__doi">
+                  <strong>DOI:</strong> {{ item.doi }}
+                </span>
+              }
+
+              @if (item.link) {
+                <a
+                  class="publications__link"
+                  [href]="item.link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  [attr.aria-label]="'Open publication: ' + item.title"
+                >
+                  Read on Springer
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    <path d="M15 3h6v6"/>
+                    <path d="M10 14 21 3"/>
+                  </svg>
+                </a>
+              }
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

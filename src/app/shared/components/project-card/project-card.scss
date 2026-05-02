@@ -1,0 +1,176 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-soft);
+  border-radius: $radius-lg;
+  overflow: hidden;
+  transition:
+    transform $dur-base $ease-out,
+    box-shadow $dur-base $ease-out,
+    border-color $dur-base $ease-out;
+  height: 100%;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, transparent 30%, var(--accent-primary) 70%, var(--accent-secondary) 100%);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    opacity: 0;
+    transition: opacity $dur-base $ease-out;
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: transparent;
+  }
+
+  &:hover::before { opacity: 1; }
+
+  // Media -------------------------------------------------------------------
+  &__media {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background:
+      linear-gradient(135deg, rgba(99, 102, 241, 0.18), rgba(34, 211, 238, 0.10));
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform $dur-slower $ease-out;
+
+    &.is-fallback { object-fit: contain; padding: $space-6; }
+  }
+
+  &:hover &__image { transform: scale(1.06); }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    padding: $space-4;
+    background: linear-gradient(180deg, transparent 50%, rgba(8, 12, 28, 0.75) 100%);
+    opacity: 0;
+    transition: opacity $dur-base $ease-out;
+  }
+
+  &:hover &__overlay { opacity: 1; }
+
+  &__category {
+    color: #fff;
+    font-size: $fs-xs;
+    font-weight: $fw-semibold;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: $radius-pill;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+  }
+
+  &__featured-tag {
+    position: absolute;
+    top: $space-3;
+    right: $space-3;
+    padding: 4px 10px;
+    border-radius: $radius-pill;
+    background: var(--gradient-accent);
+    color: #fff;
+    font-size: $fs-xs;
+    font-weight: $fw-semibold;
+    letter-spacing: 0.04em;
+    box-shadow: var(--shadow-md);
+  }
+
+  // Body --------------------------------------------------------------------
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    padding: $space-6;
+    flex: 1;
+  }
+
+  &__title {
+    font-size: $fs-xl;
+    font-weight: $fw-bold;
+    color: var(--text-primary);
+    transition: color $dur-fast $ease-out;
+  }
+
+  &:hover &__title { color: var(--accent-primary); }
+
+  &__description {
+    font-size: $fs-sm;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    @include clamp-lines(3);
+  }
+
+  &__tech {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+    margin-top: auto;
+    padding-top: $space-2;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-2 $space-4;
+    border-radius: $radius-md;
+    border: 1px solid var(--border-medium);
+    color: var(--text-primary);
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    transition:
+      color $dur-fast $ease-out,
+      background $dur-fast $ease-out,
+      border-color $dur-fast $ease-out,
+      transform $dur-fast $ease-out;
+
+    @include focus-ring;
+
+    &:hover {
+      color: var(--accent-primary);
+      border-color: var(--accent-primary);
+      transform: translateY(-2px);
+    }
+
+    &--primary {
+      background: var(--gradient-accent);
+      border-color: transparent;
+      color: #fff;
+
+      &:hover { color: #fff; transform: translateY(-2px); box-shadow: 0 8px 22px var(--accent-glow); }
+    }
+  }
+}

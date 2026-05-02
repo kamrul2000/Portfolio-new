@@ -1,0 +1,16 @@
+<section id="experience" class="experience section-padding" aria-labelledby="experience-title">
+  <div class="container container-narrow">
+
+    <app-section-title
+      eyebrow="Experience"
+      title="My professional journey"
+      subtitle="Roles, responsibilities, and the technology I've shipped along the way."
+    />
+
+    <ol class="experience__timeline" appReveal>
+      @for (job of experiences; track job.id; let i = $index) {
+        <app-timeline-item [experience]="job" />
+      }
+    </ol>
+  </div>
+</section>

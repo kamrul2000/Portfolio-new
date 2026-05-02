@@ -1,0 +1,33 @@
+<section id="projects" class="projects section-padding" aria-labelledby="projects-title">
+  <div class="container">
+
+    <app-section-title
+      eyebrow="Projects"
+      title="Selected work"
+      subtitle="A snapshot of features and apps I've built — from internal enterprise tools to real-time and full-stack systems."
+    />
+
+    <div class="projects__filters" role="tablist" aria-label="Filter projects by category">
+      @for (filter of filters; track filter.id) {
+        <button
+          type="button"
+          role="tab"
+          class="projects__filter"
+          [class.is-active]="active() === filter.id"
+          [attr.aria-selected]="active() === filter.id"
+          (click)="setFilter(filter.id)"
+        >
+          {{ filter.label }}
+        </button>
+      }
+    </div>
+
+    <div class="projects__grid" appReveal>
+      @for (project of visible(); track project.id) {
+        <app-project-card [project]="project" />
+      } @empty {
+        <p class="projects__empty">No projects in this category yet.</p>
+      }
+    </div>
+  </div>
+</section>

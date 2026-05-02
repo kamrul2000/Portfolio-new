@@ -1,0 +1,60 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.section-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: $space-3;
+  margin-bottom: $space-12;
+
+  &--left {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  &__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-2 $space-4;
+    border-radius: $radius-pill;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--accent-primary);
+    font-size: $fs-xs;
+    font-weight: $fw-semibold;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  &__eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.18);
+  }
+
+  &__heading {
+    font-size: clamp(#{$fs-2xl}, 4.5vw, #{$fs-4xl});
+    font-weight: $fw-extra;
+    letter-spacing: -0.025em;
+
+    span.accent {
+      @include gradient-text;
+    }
+  }
+
+  &__subtitle {
+    max-width: 640px;
+    color: var(--text-secondary);
+    font-size: $fs-md;
+    line-height: 1.65;
+  }
+
+  &--left &__subtitle {
+    margin-inline: 0;
+  }
+}

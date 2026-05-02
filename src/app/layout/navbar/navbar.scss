@@ -1,0 +1,282 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: $z-sticky;
+  width: 100%;
+  height: $nav-height;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  transition:
+    background-color $dur-base $ease-out,
+    border-color $dur-base $ease-out,
+    backdrop-filter $dur-base $ease-out,
+    box-shadow $dur-base $ease-out;
+  border-bottom: 1px solid transparent;
+
+  &.is-scrolled {
+    background: var(--bg-overlay);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border-bottom-color: var(--border-soft);
+    box-shadow: var(--shadow-sm);
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: $space-6;
+  }
+
+  // Brand -------------------------------------------------------------------
+  &__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-3;
+    font-size: $fs-lg;
+    font-weight: $fw-bold;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+
+    @include focus-ring;
+  }
+
+  &__brand-mark {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-accent);
+    color: #fff;
+    font-weight: $fw-extra;
+    font-size: 16px;
+    box-shadow: 0 6px 18px var(--accent-glow);
+
+    span { transform: translateY(-1px); }
+  }
+
+  &__brand-text {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__brand-dot {
+    color: var(--accent-primary);
+    margin-left: 1px;
+  }
+
+  // Primary nav -------------------------------------------------------------
+  &__nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    @include bp-down-lg {
+      position: fixed;
+      inset: $nav-height 0 0 0;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: $space-8 $space-6;
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border-soft);
+      transform: translateY(-110%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform $dur-base $ease-out, opacity $dur-base $ease-out;
+      gap: $space-6;
+
+      &.is-open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    list-style: none;
+    padding: 4px;
+    margin: 0;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: $radius-pill;
+    backdrop-filter: blur(8px);
+
+    @include bp-down-lg {
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+      background: transparent;
+      border: none;
+      backdrop-filter: none;
+      gap: $space-1;
+      padding: 0;
+    }
+  }
+
+  &__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: $radius-pill;
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    color: var(--text-secondary);
+    transition:
+      color $dur-fast $ease-out,
+      background-color $dur-fast $ease-out;
+
+    @include focus-ring;
+
+    &:hover { color: var(--text-primary); }
+
+    &.is-active {
+      color: #fff;
+      background: var(--gradient-accent);
+      box-shadow: 0 6px 18px var(--accent-glow);
+    }
+
+    @include bp-down-lg {
+      padding: $space-4 $space-5;
+      font-size: $fs-md;
+      border-radius: $radius-md;
+      justify-content: space-between;
+
+      &.is-active {
+        background: var(--bg-surface-2);
+        color: var(--accent-primary);
+        box-shadow: none;
+      }
+    }
+  }
+
+  &__mobile-cta {
+    display: none;
+
+    @include bp-down-lg {
+      display: block;
+      margin-top: auto;
+      padding-top: $space-6;
+      border-top: 1px solid var(--border-soft);
+    }
+  }
+
+  // Actions -----------------------------------------------------------------
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+  }
+
+  &__icon-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      background-color $dur-fast $ease-out,
+      border-color $dur-fast $ease-out,
+      transform $dur-fast $ease-out;
+
+    @include focus-ring;
+
+    &:hover {
+      transform: rotate(20deg) scale(1.05);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+  }
+
+  &__icon-glyph {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: $radius-pill;
+    background: var(--gradient-accent);
+    color: #fff;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    transition: transform $dur-fast $ease-out, box-shadow $dur-fast $ease-out;
+    box-shadow: 0 6px 18px var(--accent-glow);
+
+    @include focus-ring;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px var(--accent-glow);
+    }
+
+    &--desktop {
+      @include bp-down-lg { display: none; }
+    }
+  }
+
+  // Hamburger ---------------------------------------------------------------
+  &__hamburger {
+    display: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--border-medium);
+    background: var(--glass-bg);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    @include bp-down-lg { display: inline-flex; }
+
+    @include focus-ring;
+
+    span {
+      width: 18px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: transform $dur-base $ease-out, opacity $dur-fast $ease-out;
+    }
+
+    &.is-active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    &.is-active span:nth-child(2) { opacity: 0; }
+    &.is-active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+
+  // Backdrop ----------------------------------------------------------------
+  &__backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: ($z-sticky - 1);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity $dur-base $ease-out;
+
+    &.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @include bp-lg { display: none; }
+  }
+}

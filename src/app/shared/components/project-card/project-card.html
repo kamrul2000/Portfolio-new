@@ -1,0 +1,86 @@
+<article class="project-card" [class.project-card--featured]="project.featured">
+  <div class="project-card__media">
+    <img
+      class="project-card__image"
+      [src]="project.image"
+      [alt]="project.title + ' preview'"
+      loading="lazy"
+      decoding="async"
+      (error)="onImageError($event)"
+    />
+
+    <div class="project-card__overlay" aria-hidden="true">
+      <span class="project-card__category">{{ project.category }}</span>
+    </div>
+
+    @if (project.featured) {
+      <span class="project-card__featured-tag" aria-label="Featured project">
+        ★ Featured
+      </span>
+    }
+  </div>
+
+  <div class="project-card__body">
+    <h3 class="project-card__title">{{ project.title }}</h3>
+    <p class="project-card__description">{{ project.description }}</p>
+
+    <ul class="project-card__tech" aria-label="Technologies used">
+      @for (tech of project.tech; track tech) {
+        <li><app-tech-badge [label]="tech" /></li>
+      }
+    </ul>
+
+    <div class="project-card__actions">
+      @if (project.links?.demo) {
+        <a
+          class="project-card__btn project-card__btn--primary"
+          [href]="project.links?.demo"
+          target="_blank"
+          rel="noopener noreferrer"
+          [attr.aria-label]="'View live demo of ' + project.title"
+        >
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <path d="M15 3h6v6"/>
+            <path d="M10 14 21 3"/>
+          </svg>
+          Live Demo
+        </a>
+      }
+
+      @if (project.links?.repo) {
+        <a
+          class="project-card__btn"
+          [href]="project.links?.repo"
+          target="_blank"
+          rel="noopener noreferrer"
+          [attr.aria-label]="'View source code of ' + project.title"
+        >
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5a11.5 11.5 0 0 0-3.63 22.41c.58.1.79-.25.79-.56 0-.27-.01-1-.02-1.96-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.27-5.23-5.66 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17a10.93 10.93 0 0 1 5.74 0c2.19-1.48 3.15-1.17 3.15-1.17.62 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.07 0 4.4-2.69 5.36-5.25 5.65.41.36.78 1.06.78 2.13 0 1.54-.01 2.78-.01 3.16 0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/>
+          </svg>
+          Code
+        </a>
+      }
+
+      @if (project.links?.docs) {
+        <a
+          class="project-card__btn"
+          [href]="project.links?.docs"
+          target="_blank"
+          rel="noopener noreferrer"
+          [attr.aria-label]="'View API docs for ' + project.title"
+        >
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <line x1="10" y1="9" x2="8" y2="9"/>
+          </svg>
+          API Docs
+        </a>
+      }
+    </div>
+  </div>
+</article>
