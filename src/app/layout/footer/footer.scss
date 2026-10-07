@@ -43,28 +43,14 @@
     display: inline-flex;
     align-items: center;
     gap: $space-3;
-    font-size: $fs-xl;
-    font-weight: $fw-bold;
+    font-size: $fs-lg;
+    font-weight: $fw-semibold;
     color: var(--text-primary);
   }
 
-  &__brand-mark {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--gradient-accent);
-    color: #fff;
-    font-weight: $fw-extra;
-  }
-
-  &__brand-text span { color: var(--accent-primary); }
-
   &__tagline {
     color: var(--text-secondary);
-    font-size: $fs-sm;
+    font-size: 15px;
     line-height: 1.65;
   }
 
@@ -104,7 +90,7 @@
     padding-top: $space-6;
     border-top: 1px solid var(--border-soft);
     color: var(--text-muted);
-    font-size: $fs-xs;
+    font-size: 13px;
     text-align: center;
 
     @include bp-md { flex-direction: row; justify-content: space-between; text-align: left; }

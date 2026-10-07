@@ -2,13 +2,18 @@ import { DOCUMENT, Inject, Injectable, NgZone, OnDestroy, signal } from '@angula
 
 /**
  * Tracks which section is currently in view so the navbar can highlight
- * the active link. Uses IntersectionObserver and runs callbacks outside
- * Angular's zone for performance, only re-entering on actual changes.
+ * the active link.
+ *
+ * Sections are resolved on every update (not once up front) because the page
+ * content is lazy-loaded and may not exist yet when the navbar starts observing.
+ * Listeners run outside Angular's zone and only re-enter on an actual change.
  */
 @Injectable({ providedIn: 'root' })
 export class ScrollSpyService implements OnDestroy {
-  private observer?: IntersectionObserver;
-  private observedIds: string[] = [];
+  private ids: string[] = [];
+  private frame = 0;
+  private timers: number[] = [];
+  private readonly onScroll = () => this.schedule();
 
   readonly activeSection = signal<string>('home');
 
@@ -18,35 +23,17 @@ export class ScrollSpyService implements OnDestroy {
   ) {}
 
   observe(sectionIds: readonly string[]): void {
-    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
+    if (typeof window === 'undefined') return;
 
     this.disconnect();
-    this.observedIds = [...sectionIds];
+    this.ids = [...sectionIds];
 
     this.zone.runOutsideAngular(() => {
-      this.observer = new IntersectionObserver(
-        entries => {
-          // Pick the entry with the largest intersection ratio currently visible.
-          const visible = entries
-            .filter(e => e.isIntersecting)
-            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-          if (!visible) return;
-
-          const id = (visible.target as HTMLElement).id;
-          if (id && id !== this.activeSection()) {
-            this.zone.run(() => this.activeSection.set(id));
-          }
-        },
-        {
-          rootMargin: '-35% 0px -55% 0px',
-          threshold: [0, 0.25, 0.5, 0.75, 1],
-        },
-      );
-
-      for (const id of this.observedIds) {
-        const el = this.doc.getElementById(id);
-        if (el) this.observer!.observe(el);
+      window.addEventListener('scroll', this.onScroll, { passive: true });
+      window.addEventListener('resize', this.onScroll, { passive: true });
+      // The lazy page renders after the navbar, so re-check a few times on load.
+      for (const delay of [0, 300, 1000]) {
+        this.timers.push(window.setTimeout(() => this.update(), delay));
       }
     });
   }
@@ -58,11 +45,37 @@ export class ScrollSpyService implements OnDestroy {
   }
 
   disconnect(): void {
-    this.observer?.disconnect();
-    this.observer = undefined;
+    if (typeof window === 'undefined') return;
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onScroll);
+    cancelAnimationFrame(this.frame);
+    this.timers.forEach(t => clearTimeout(t));
+    this.timers = [];
   }
 
   ngOnDestroy(): void {
     this.disconnect();
+  }
+
+  private schedule(): void {
+    cancelAnimationFrame(this.frame);
+    this.frame = requestAnimationFrame(() => this.update());
+  }
+
+  private update(): void {
+    const line = window.innerHeight * 0.35;
+    const atBottom =
+      window.innerHeight + window.scrollY >= this.doc.documentElement.scrollHeight - 4;
+
+    let current = this.ids[0];
+    for (const id of this.ids) {
+      const el = this.doc.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= line) current = id;
+    }
+    if (atBottom) current = this.ids[this.ids.length - 1];
+
+    if (current && current !== this.activeSection()) {
+      this.zone.run(() => this.activeSection.set(current));
+    }
   }
 }

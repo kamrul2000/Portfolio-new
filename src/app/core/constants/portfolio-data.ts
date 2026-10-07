@@ -34,7 +34,7 @@ export const PROFILE: Profile = {
     'using ASP.NET Core, C#, Angular, and SQL Server. Strong in designing RESTful APIs, integrating frontend ' +
     'and backend systems, and optimizing application performance — with hands-on experience in Microsoft Azure ' +
     'deployment, Docker-based environments, and clean architecture practices.',
-  profileImage: 'assets/images/profile/profile-main.jpg',
+  profileImage: 'assets/images/profile/profile-avatar.jpg',
   profileFallback: 'assets/images/placeholders/profile-fallback.svg',
   resumePath: 'assets/files/Md_Kamrul_Hassan_Khan_CV.pdf',
   availability: 'open',
@@ -53,12 +53,12 @@ export const STATS: readonly Stat[] = [
 // Quick info cards (about section)
 // -----------------------------------------------------------------------------
 export const INFO_CARDS: readonly InfoCard[] = [
-  { icon: '📍', label: 'Location',   value: 'Dhaka, Bangladesh' },
-  { icon: '💼', label: 'Occupation', value: 'Associate Software Engineer' },
-  { icon: '✉',  label: 'Email',      value: 'kamrulmuh39@gmail.com', href: 'mailto:kamrulmuh39@gmail.com' },
-  { icon: '☎',  label: 'Phone',      value: '+880 162 556 6169',     href: 'tel:+8801625566169' },
-  { icon: '⚡', label: 'Main Stack', value: '.NET Core · Angular · SQL Server · Azure' },
-  { icon: '🟢', label: 'Status',     value: 'Open to opportunities' },
+  { icon: 'pin', label: 'Location',   value: 'Dhaka, Bangladesh' },
+  { icon: 'briefcase', label: 'Occupation', value: 'Associate Software Engineer' },
+  { icon: 'mail', label: 'Email',      value: 'kamrulmuh39@gmail.com', href: 'mailto:kamrulmuh39@gmail.com' },
+  { icon: 'phone', label: 'Phone',      value: '+880 162 556 6169',     href: 'tel:+8801625566169' },
+  { icon: 'zap', label: 'Main Stack', value: '.NET Core · Angular · SQL Server · Azure' },
+  { icon: 'check-circle', label: 'Status',     value: 'Open to opportunities' },
 ] as const;
 
 // -----------------------------------------------------------------------------
@@ -107,53 +107,47 @@ export const SKILL_CATEGORIES: readonly SkillCategory[] = [
   {
     id: 'backend',
     title: 'Backend & APIs',
-    icon: '⚙',
+    icon: 'code',
     skills: [
       { name: 'C#' },
       { name: 'ASP.NET Core' },
-      { name: 'ASP.NET MVC' },
       { name: 'ASP.NET Web API' },
       { name: 'Entity Framework Core' },
-      { name: 'ADO.NET' },
       { name: 'RESTful API Design' },
     ],
   },
   {
     id: 'frontend',
     title: 'Frontend',
-    icon: '🎨',
+    icon: 'layout',
     skills: [
       { name: 'Angular' },
       { name: 'TypeScript' },
       { name: 'JavaScript (ES6+)' },
-      { name: 'HTML5' },
       { name: 'SCSS / CSS3' },
       { name: 'Bootstrap' },
-      { name: 'Tailwind CSS' },
     ],
   },
   {
     id: 'architecture',
     title: 'Architecture & Design',
-    icon: '🧱',
+    icon: 'layers',
     skills: [
       { name: 'SOLID Principles' },
       { name: 'Clean Architecture' },
       { name: 'Layered Architecture' },
       { name: 'Repository Pattern' },
       { name: 'Dependency Injection' },
-      { name: 'OOP' },
     ],
   },
   {
     id: 'database',
     title: 'Database',
-    icon: '🗄',
+    icon: 'database',
     skills: [
       { name: 'MS SQL Server' },
       { name: 'MySQL' },
       { name: 'Stored Procedures' },
-      { name: 'Views' },
       { name: 'Query Optimization' },
       { name: 'Relational Design' },
     ],
@@ -161,30 +155,24 @@ export const SKILL_CATEGORIES: readonly SkillCategory[] = [
   {
     id: 'devops',
     title: 'DevOps & Cloud',
-    icon: '☁',
+    icon: 'cloud',
     skills: [
       { name: 'Microsoft Azure' },
       { name: 'Docker' },
       { name: 'Docker Compose' },
       { name: 'CI/CD' },
-      { name: 'App Deployment' },
-      { name: 'Environment Config' },
     ],
   },
   {
     id: 'tools',
     title: 'Tools & Workflow',
-    icon: '🛠',
+    icon: 'wrench',
     skills: [
       { name: 'Git' },
       { name: 'GitHub' },
       { name: 'Postman' },
       { name: 'Swagger' },
-      { name: 'Visual Studio' },
-      { name: 'VS Code' },
       { name: 'Agile / Scrum' },
-      { name: 'Crystal Reports' },
-      { name: 'RDLC' },
     ],
   },
 ] as const;
@@ -206,17 +194,15 @@ export const EXPERIENCES: readonly Experience[] = [
       {
         title: 'FlowCraft — Infrastructure Development Company Limited (IDCOL)',
         bullets: [
-          'Developed RESTful APIs and integrated them with Angular modules — Bill, Budget, Configuration, and Fixed Assets.',
-          'Built end-to-end features across backend and frontend, ensuring seamless data flow.',
-          'Improved performance and scalability through efficient API design and integration.',
+          'Built RESTful APIs in ASP.NET Core and wired them to the Angular Bill, Budget, Configuration, and Fixed Assets modules.',
+          'Delivered features end-to-end, from database and API to UI, with attention to API design and scalability.',
         ],
       },
       {
-        title: 'NFL Admin Panel — National Finance Limited',
+        title: 'API Middleware — Bank Asia PLC',
         bullets: [
-          'Developed and integrated backend APIs with Angular-based Customer Management and Approval modules.',
-          'Ensured reliable data handling and smooth frontend-backend communication.',
-          'Enhanced system performance through optimized API integration.',
+          'Built the middleware API endpoints in ASP.NET Core, including request/response mapping between client systems and the bank services, with authentication on every endpoint.',
+          'Developed the Organization Setup, Middleware API Setup, and Mock Manager modules, plus request/response logging for traceability and easier integration testing.',
         ],
       },
     ],
@@ -236,17 +222,15 @@ export const EXPERIENCES: readonly Experience[] = [
       {
         title: 'Human Resource Management System — Meghna Life Insurance',
         bullets: [
-          'Developed HRM modules for employee management, leave, payroll, and loan processing.',
-          'Built backend functionalities using ASP.NET Core, integrated with SQL Server.',
-          'Improved data handling and system performance through optimized queries and structured design.',
+          'Built HRM modules for employee management, leave, payroll, and loan processing on ASP.NET Core and SQL Server.',
+          'Optimized queries and structured the data layer to keep payroll and leave processing fast and consistent.',
         ],
       },
       {
         title: 'Accounts and Inventory Management System — RMS Electronics',
         bullets: [
-          'Developed inventory and accounting modules — stock management, ledger, journal entries, and financial reports.',
-          'Built backend with ASP.NET Core MVC, Entity Framework Core, and MS SQL Server.',
-          'Improved scalability through optimized database queries and clean architecture practices.',
+          'Built inventory and accounting modules: stock management, ledger, journal entries, and financial reports.',
+          'Used ASP.NET Core MVC, EF Core, and SQL Server with clean architecture and optimized queries to keep the system scalable.',
         ],
       },
     ],
@@ -313,11 +297,11 @@ export const PROJECTS: readonly Project[] = [
     title: 'InnApp — SaaS Inventory Management',
     description:
       'A full-stack, multi-user SaaS inventory system with secure auth, role-based access, and modules for Products, Inventory, Orders, Suppliers, Customers, and Reporting. Deployed on Microsoft Azure (frontend, backend, and database).',
-    image: 'assets/images/projects/innapp.jpg',
+    image: 'assets/images/projects/inapp.png',
     tech: ['ASP.NET Core', 'Angular', 'MS SQL Server', 'Azure', 'JWT'],
     category: 'fullstack',
     featured: true,
-    links: { repo: 'https://github.com/kamrul2000' },
+    links: { repo: 'https://github.com/kamrul2000/InventorySaaS' },
   },
   {
     id: 'e-recruitment',
@@ -328,7 +312,7 @@ export const PROJECTS: readonly Project[] = [
     tech: ['ASP.NET Core Web API', 'Angular', 'EF Core', 'SQL Server', 'JWT'],
     category: 'fullstack',
     featured: true,
-    links: { repo: 'https://github.com/kamrul2000' },
+    links: { repo: 'https://github.com/kamrul2000/ERecruitment' },
   },
   {
     id: 'football-statify',
@@ -339,7 +323,7 @@ export const PROJECTS: readonly Project[] = [
     tech: ['ASP.NET Core', 'Angular', 'MS SQL Server', 'Swagger'],
     category: 'fullstack',
     featured: true,
-    links: { repo: 'https://github.com/kamrul2000', docs: '#' },
+    links: { repo: 'https://github.com/kamrul2000/FootballStatify' },
   },
   {
     id: 'live-chat',
@@ -419,49 +403,57 @@ export const PROJECTS: readonly Project[] = [
 export const ACHIEVEMENTS: readonly Achievement[] = [
   {
     id: 'enterprise',
-    icon: '🏢',
+    group: 'professional',
+    icon: 'building',
     title: 'Enterprise Web Applications',
-    description: 'Shipped production features for IDCOL, National Finance Limited, Meghna Life Insurance, and RMS Electronics.',
+    description: 'Shipped production features for IDCOL, Bank Asia PLC, Meghna Life Insurance, and RMS Electronics.',
   },
   {
     id: 'azure',
-    icon: '☁',
+    group: 'professional',
+    icon: 'cloud',
     title: 'Azure-Deployed SaaS',
     description: 'Built and deployed a complete multi-user SaaS inventory platform (frontend, backend, DB) on Microsoft Azure.',
   },
   {
     id: 'publication',
-    icon: '📄',
+    group: 'professional',
+    icon: 'file',
     title: 'Springer Publication',
     description: 'Co-authored peer-reviewed paper on intrusion detection with ensemble learning (Springer LNNS, 2025).',
   },
   {
     id: 'problem-solving',
-    icon: '🧠',
+    group: 'professional',
+    icon: 'target',
     title: '500+ Problems Solved',
     description: 'Solved 500+ problems on Codeforces, LeetCode, and Beecrowd — sharpening DSA and analytical thinking.',
   },
   {
     id: 'club-vp',
-    icon: '🎓',
+    group: 'beyond',
+    icon: 'graduation',
     title: 'Vice President, CSTE Club',
     description: '2023–24 Executive Committee — led student-driven technical events and community initiatives.',
   },
   {
     id: 'cricket',
-    icon: '🏏',
+    group: 'beyond',
+    icon: 'trophy',
     title: 'Inter-Software Cricket Champion',
     description: 'Member, ERA-InfoTech Limited Cricket Team — Champion, Inter Software Cricket Tournament 2025.',
   },
   {
     id: 'futsal',
-    icon: '⚽',
+    group: 'beyond',
+    icon: 'activity',
     title: 'Corporate Futsal Team',
     description: 'Member, ERA-InfoTech Limited Futsal Team 2026 — active in company sports and team-building.',
   },
   {
     id: 'collaboration',
-    icon: '🤝',
+    group: 'beyond',
+    icon: 'users',
     title: 'Agile Team Collaboration',
     description: 'Strong experience working in agile teams with code reviews, sprint planning, and shared ownership.',
   },

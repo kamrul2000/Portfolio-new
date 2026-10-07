@@ -45,6 +45,7 @@
     background: var(--gradient-card);
     border: 1px solid var(--border-soft);
     font-size: 24px;
+    color: var(--accent-primary);
     margin-bottom: $space-2;
   }
 
@@ -59,5 +60,53 @@
     color: var(--text-secondary);
     font-size: $fs-sm;
     line-height: 1.6;
+  }
+
+  &__subhead {
+    margin-block: $space-12 $space-5;
+    padding-bottom: $space-3;
+    border-bottom: 1px solid var(--border-soft);
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  &__list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: $space-10;
+
+    @include bp-md { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  &__row {
+    display: flex;
+    gap: $space-4;
+    align-items: flex-start;
+    padding-block: $space-4;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  &__row-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-size: 20px;
+    color: var(--accent-primary);
+  }
+
+  &__row-title {
+    font-size: $fs-base;
+    font-weight: $fw-semibold;
+    color: var(--text-primary);
+  }
+
+  &__row-desc {
+    margin-top: 2px;
+    color: var(--text-secondary);
+    font-size: $fs-sm;
+    line-height: 1.55;
   }
 }

@@ -3,18 +3,32 @@
 
     <app-section-title
       eyebrow="Highlights"
-      title="Achievements & beyond code"
-      subtitle="Professional wins, problem-solving practice, and the team-side of being an engineer."
+      title="Achievements"
+      subtitle="Professional milestones, research, and life beyond code."
     />
 
     <div class="achievements__grid">
-      @for (item of items; track item.id; let i = $index) {
+      @for (item of professional; track item.id; let i = $index) {
         <article class="achievements__card" appReveal [revealDelay]="i * 70">
-          <span class="achievements__icon" aria-hidden="true">{{ item.icon }}</span>
+          <span class="achievements__icon" aria-hidden="true"><app-icon [name]="item.icon" /></span>
           <h3 class="achievements__title">{{ item.title }}</h3>
           <p class="achievements__desc">{{ item.description }}</p>
         </article>
       }
     </div>
+
+    <h3 class="achievements__subhead">Beyond code</h3>
+
+    <ul class="achievements__list" appReveal>
+      @for (item of beyond; track item.id) {
+        <li class="achievements__row">
+          <span class="achievements__row-icon" aria-hidden="true"><app-icon [name]="item.icon" /></span>
+          <div>
+            <h4 class="achievements__row-title">{{ item.title }}</h4>
+            <p class="achievements__row-desc">{{ item.description }}</p>
+          </div>
+        </li>
+      }
+    </ul>
   </div>
 </section>

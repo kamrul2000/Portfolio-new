@@ -79,12 +79,8 @@
 }
 
 // Gradient text ---------------------------------------------------------------
-@mixin gradient-text($from: var(--accent-primary), $to: var(--accent-secondary)) {
-  background: linear-gradient(135deg, $from 0%, $to 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+@mixin gradient-text($from: var(--accent-primary), $to: var(--accent-primary)) {
+  color: $from;
 }
 
 // Section padding -------------------------------------------------------------

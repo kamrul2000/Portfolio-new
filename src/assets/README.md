@@ -7,8 +7,8 @@ This folder is bundled into the production build and served from `/assets/...`.
 ### `images/profile/`
 Place your profile photo here:
 
-- `profile-main.jpg` — used by the Hero avatar.
-  - Recommended: square crop, 800×800 or larger, JPG/WebP.
+- `profile-avatar.jpg` — used by the Hero avatar.
+  - Recommended: square, head-and-shoulders crop, 720×720 or larger, JPG/WebP.
 
 If the file is missing, the UI falls back to `images/placeholders/profile-fallback.svg`.
 
@@ -17,7 +17,7 @@ Place project preview images here. The expected filenames are:
 
 **Featured (CV showcase):**
 
-- `innapp.jpg`
+- `inapp.png`
 - `e-recruitment.jpg`
 - `football-statify.jpg`
 

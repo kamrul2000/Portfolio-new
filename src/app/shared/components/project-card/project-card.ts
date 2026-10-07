@@ -1,6 +1,14 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Project } from '../../../core/models/portfolio.models';
+import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
+import { Project, ProjectCategory } from '../../../core/models/portfolio.models';
 import { TechBadge } from '../tech-badge/tech-badge';
+
+const CATEGORY_LABELS: Record<ProjectCategory, string> = {
+  'fullstack': 'Full-Stack',
+  'web-app': 'Web App',
+  'api': 'API',
+  'realtime': 'Real-Time',
+  'frontend': 'Frontend',
+};
 
 @Component({
   selector: 'app-project-card',
@@ -13,12 +21,10 @@ import { TechBadge } from '../tech-badge/tech-badge';
 export class ProjectCard {
   @Input({ required: true }) project!: Project;
 
-  readonly fallbackImage = 'assets/images/placeholders/project-fallback.svg';
+  /** When the preview image is missing the card renders as a clean text card. */
+  protected readonly imageFailed = signal(false);
 
-  onImageError(event: Event): void {
-    const img = event.target as HTMLImageElement;
-    if (img.src.endsWith(this.fallbackImage)) return; // prevent loop
-    img.src = this.fallbackImage;
-    img.classList.add('is-fallback');
+  protected get categoryLabel(): string {
+    return CATEGORY_LABELS[this.project.category] ?? this.project.category;
   }
 }

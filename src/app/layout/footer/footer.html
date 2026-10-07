@@ -4,8 +4,7 @@
     <div class="footer__grid">
       <div class="footer__brand-block">
         <a class="footer__brand" href="#home" aria-label="Back to top">
-          <span class="footer__brand-mark" aria-hidden="true">K</span>
-          <span class="footer__brand-text">{{ profile.firstName }}<span>.</span></span>
+          <span class="footer__brand-text">{{ profile.fullName }}</span>
         </a>
         <p class="footer__tagline">
           {{ profile.tagline }} — building scalable .NET &amp; Angular apps from Dhaka, Bangladesh.
@@ -34,9 +33,6 @@
 
     <div class="footer__base">
       <p>© {{ currentYear }} {{ profile.fullName }}. All Rights Reserved.</p>
-      <p class="footer__built-with">
-        Built with <span aria-hidden="true">♥</span> using Angular &amp; SCSS
-      </p>
     </div>
 
   </div>

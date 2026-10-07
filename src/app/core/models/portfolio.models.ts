@@ -1,3 +1,5 @@
+import type { IconName } from '../../shared/components/icon/icon';
+
 /**
  * Strongly-typed contracts for every section of the portfolio.
  * Update `portfolio-data.ts` to change content; the compiler will surface
@@ -36,7 +38,7 @@ export interface Stat {
 }
 
 export interface InfoCard {
-  readonly icon: string;       // single-glyph or short symbol
+  readonly icon: IconName;
   readonly label: string;
   readonly value: string;
   readonly href?: string;
@@ -45,7 +47,7 @@ export interface InfoCard {
 export interface SkillCategory {
   readonly id: string;
   readonly title: string;
-  readonly icon: string;
+  readonly icon: IconName;
   readonly skills: readonly Skill[];
 }
 
@@ -117,7 +119,8 @@ export interface ProjectLinks {
 
 export interface Achievement {
   readonly id: string;
-  readonly icon: string;
+  readonly group: 'professional' | 'beyond';
+  readonly icon: IconName;
   readonly title: string;
   readonly description: string;
 }

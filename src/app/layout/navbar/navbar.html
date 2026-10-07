@@ -9,10 +9,7 @@
       (click)="goTo('home', $event)"
       aria-label="Go to home"
     >
-      <span class="navbar__brand-mark" aria-hidden="true">
-        <span>K</span>
-      </span>
-      <span class="navbar__brand-text">{{ profile.firstName }}<span class="navbar__brand-dot">.</span></span>
+      <span class="navbar__brand-text">{{ profile.fullName }}</span>
     </a>
 
     <nav class="navbar__nav" [class.is-open]="menuOpen()" aria-label="Primary navigation">
@@ -53,7 +50,7 @@
         [attr.aria-label]="themeLabel()"
         [attr.title]="themeLabel()"
       >
-        <span class="navbar__icon-glyph">{{ themeIcon() }}</span>
+        <span class="navbar__icon-glyph"><app-icon [name]="themeIcon()" /></span>
       </button>
 
       <a

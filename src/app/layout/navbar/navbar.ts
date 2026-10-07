@@ -1,3 +1,4 @@
+import { Icon, type IconName } from '../../shared/components/icon/icon';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,6 +16,7 @@ import { ThemeService } from '../../core/services/theme.service';
 @Component({
   selector: 'app-navbar',
   standalone: true,
+  imports: [Icon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
@@ -32,7 +34,7 @@ export class Navbar implements OnInit, OnDestroy {
   protected readonly scrolled = signal(false);
   protected readonly menuOpen = signal(false);
 
-  protected readonly themeIcon = computed(() => (this.isDark() ? '☀' : '☾'));
+  protected readonly themeIcon = computed<IconName>(() => (this.isDark() ? 'sun' : 'moon'));
   protected readonly themeLabel = computed(() =>
     this.isDark() ? 'Switch to light theme' : 'Switch to dark theme',
   );

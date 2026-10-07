@@ -12,30 +12,14 @@
 
   &__card {
     position: relative;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: $space-5;
-    align-items: flex-start;
     padding: clamp($space-5, 3vw, $space-8);
     border-radius: $radius-lg;
     background: var(--bg-elevated);
     border: 1px solid var(--border-soft);
-    overflow: hidden;
     transition:
       transform $dur-base $ease-out,
       border-color $dur-base $ease-out,
       box-shadow $dur-base $ease-out;
-
-    &::before {
-      content: '';
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: 4px;
-      background: var(--gradient-accent);
-      transform: scaleY(0.4);
-      transform-origin: top;
-      transition: transform $dur-base $ease-out;
-    }
 
     &:hover {
       transform: translateY(-4px);
@@ -43,20 +27,6 @@
       box-shadow: var(--shadow-md);
     }
 
-    &:hover::before { transform: scaleY(1); }
-  }
-
-  &__icon {
-    width: 52px;
-    height: 52px;
-    border-radius: $radius-md;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--gradient-card);
-    border: 1px solid var(--border-soft);
-    color: var(--accent-primary);
-    flex-shrink: 0;
   }
 
   &__body {
@@ -71,30 +41,9 @@
     flex-wrap: wrap;
     align-items: center;
     gap: $space-2;
-    color: var(--text-muted);
-    font-size: $fs-xs;
-    font-weight: $fw-semibold;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  &__venue {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 10px;
-    border-radius: $radius-pill;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
     color: var(--accent-primary);
-  }
-
-  &__year {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 10px;
-    border-radius: $radius-pill;
-    background: rgba(16, 185, 129, 0.12);
-    color: #10b981;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
   }
 
   &__title {

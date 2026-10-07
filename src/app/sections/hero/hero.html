@@ -1,10 +1,4 @@
 <section id="home" class="hero" aria-labelledby="hero-title">
-  <div class="hero__bg" aria-hidden="true">
-    <span class="hero__blob hero__blob--a"></span>
-    <span class="hero__blob hero__blob--b"></span>
-    <span class="hero__grid"></span>
-  </div>
-
   <div class="container hero__inner">
 
     <div class="hero__copy">
@@ -13,14 +7,11 @@
         Open to opportunities
       </span>
 
-      <h1 id="hero-title" class="hero__title anim-fade-in-up anim-delay-1">
-        Hi, I'm <span class="hero__title-name">{{ profile.fullName }}</span>
-      </h1>
+      <h1 id="hero-title" class="hero__title anim-fade-in-up anim-delay-1">{{ profile.fullName }}</h1>
 
       <h2 class="hero__subtitle anim-fade-in-up anim-delay-2">
         <span class="hero__role">{{ profile.title }}</span>
-        <span class="hero__role-divider" aria-hidden="true">·</span>
-        <span class="hero__company">{{ profile.company }}</span>
+        <span class="hero__company">at {{ profile.company }}</span>
       </h2>
 
       <p class="hero__description anim-fade-in-up anim-delay-3">
@@ -57,13 +48,6 @@
           Download CV
         </a>
 
-        <a
-          href="#contact"
-          class="hero__btn hero__btn--outline"
-          (click)="scrollTo('contact', $event)"
-        >
-          Contact Me
-        </a>
       </div>
 
       <div class="hero__social anim-fade-in-up anim-delay-5">
@@ -83,8 +67,6 @@
 
     <aside class="hero__visual anim-scale-in anim-delay-3" aria-hidden="false">
       <div class="hero__avatar-frame">
-        <div class="hero__avatar-glow" aria-hidden="true"></div>
-
         <div class="hero__avatar">
           <img
             [src]="profile.profileImage"
@@ -94,35 +76,9 @@
             (error)="onAvatarError($event)"
           />
         </div>
-
-        <span class="hero__floating hero__floating--top">
-          <span aria-hidden="true">⚡</span>
-          <span>{{ profile.tagline }}</span>
-        </span>
-
-        <span class="hero__floating hero__floating--bottom">
-          <span aria-hidden="true">📍</span>
-          <span>{{ profile.location }}</span>
-        </span>
-
-        <span class="hero__floating hero__floating--side">
-          <span aria-hidden="true">💻</span>
-          <span>.NET · Angular</span>
-        </span>
       </div>
     </aside>
 
   </div>
 
-  <a
-    class="hero__scroll-cue"
-    href="#about"
-    (click)="scrollTo('about', $event)"
-    aria-label="Scroll to About section"
-  >
-    <span class="hero__scroll-text">Scroll</span>
-    <span class="hero__scroll-mouse" aria-hidden="true">
-      <span class="hero__scroll-wheel"></span>
-    </span>
-  </a>
 </section>

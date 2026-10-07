@@ -22,22 +22,20 @@
     font-weight: $fw-medium;
     transition:
       color $dur-fast $ease-out,
-      background $dur-fast $ease-out,
-      border-color $dur-fast $ease-out,
-      transform $dur-fast $ease-out;
+      background-color $dur-fast $ease-out,
+      border-color $dur-fast $ease-out;
 
     @include focus-ring;
 
     &:hover {
       color: var(--text-primary);
-      transform: translateY(-2px);
+      border-color: var(--border-strong);
     }
 
     &.is-active {
-      background: var(--gradient-accent);
+      background: var(--accent-primary);
       color: #fff;
-      border-color: transparent;
-      box-shadow: 0 6px 18px var(--accent-glow);
+      border-color: var(--accent-primary);
     }
   }
 

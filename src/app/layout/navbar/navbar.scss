@@ -38,38 +38,17 @@
     display: inline-flex;
     align-items: center;
     gap: $space-3;
-    font-size: $fs-lg;
-    font-weight: $fw-bold;
+    font-size: $fs-md;
+    font-weight: $fw-semibold;
     color: var(--text-primary);
     letter-spacing: -0.01em;
 
     @include focus-ring;
   }
 
-  &__brand-mark {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--gradient-accent);
-    color: #fff;
-    font-weight: $fw-extra;
-    font-size: 16px;
-    box-shadow: 0 6px 18px var(--accent-glow);
-
-    span { transform: translateY(-1px); }
-  }
-
   &__brand-text {
     display: inline-flex;
     align-items: center;
-  }
-
-  &__brand-dot {
-    color: var(--accent-primary);
-    margin-left: 1px;
   }
 
   // Primary nav -------------------------------------------------------------
@@ -105,12 +84,8 @@
     align-items: center;
     gap: $space-2;
     list-style: none;
-    padding: 4px;
+    padding: 0;
     margin: 0;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: $radius-pill;
-    backdrop-filter: blur(8px);
 
     @include bp-down-lg {
       flex-direction: column;
@@ -142,9 +117,19 @@
     &:hover { color: var(--text-primary); }
 
     &.is-active {
-      color: #fff;
-      background: var(--gradient-accent);
-      box-shadow: 0 6px 18px var(--accent-glow);
+      color: var(--text-primary);
+      font-weight: $fw-semibold;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 16px;
+        right: 16px;
+        bottom: 2px;
+        height: 2px;
+        border-radius: 2px;
+        background: var(--accent-primary);
+      }
     }
 
     @include bp-down-lg {
@@ -156,7 +141,8 @@
       &.is-active {
         background: var(--bg-surface-2);
         color: var(--accent-primary);
-        box-shadow: none;
+
+        &::after { display: none; }
       }
     }
   }
@@ -213,18 +199,16 @@
     align-items: center;
     padding: 10px 20px;
     border-radius: $radius-pill;
-    background: var(--gradient-accent);
+    background: var(--accent-primary);
     color: #fff;
     font-size: $fs-sm;
     font-weight: $fw-semibold;
-    transition: transform $dur-fast $ease-out, box-shadow $dur-fast $ease-out;
-    box-shadow: 0 6px 18px var(--accent-glow);
+    transition: background-color $dur-fast $ease-out;
 
     @include focus-ring;
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px var(--accent-glow);
+      background: var(--accent-secondary);
     }
 
     &--desktop {
