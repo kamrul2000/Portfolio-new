@@ -130,6 +130,17 @@
           }
         </div>
 
+        <!-- honeypot: hidden from people, visible to bots -->
+        <input
+          type="text"
+          name="_gotcha"
+          tabindex="-1"
+          autocomplete="off"
+          aria-hidden="true"
+          class="contact__honeypot"
+          (input)="honeypot = $any($event.target).value"
+        />
+
         <button
           type="submit"
           class="contact__submit"
@@ -156,6 +167,16 @@
         <div>
           <strong>Message sent!</strong>
           <span>Thanks for reaching out — I'll reply soon.</span>
+        </div>
+      </div>
+    }
+
+    @if (toast() === 'error') {
+      <div class="contact__toast contact__toast--error" role="alert">
+        <span class="contact__toast-icon" aria-hidden="true">!</span>
+        <div>
+          <strong>Couldn't send your message</strong>
+          <span>Please try again, or email me at {{ profile.email }}.</span>
         </div>
       </div>
     }

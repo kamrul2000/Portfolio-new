@@ -244,11 +244,22 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: var(--gradient-accent);
+    background: var(--accent-primary);
     color: #fff;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-weight: $fw-bold;
+  }
+
+  &__toast--error { border-color: $danger; }
+  &__toast--error &__toast-icon { background: $danger; }
+
+  &__honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
   }
 }

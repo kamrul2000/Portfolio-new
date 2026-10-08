@@ -41,6 +41,13 @@ export const PROFILE: Profile = {
 };
 
 // -----------------------------------------------------------------------------
+// Contact form (Formspree)
+// -----------------------------------------------------------------------------
+// Create a form at https://formspree.io and paste its endpoint here,
+// e.g. 'https://formspree.io/f/abcdwxyz'. Leave empty to disable sending.
+export const CONTACT_ENDPOINT = 'https://formspree.io/f/mgaoanrw';
+
+// -----------------------------------------------------------------------------
 // Stats (hero & about)
 // -----------------------------------------------------------------------------
 export const STATS: readonly Stat[] = [

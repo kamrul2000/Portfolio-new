@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { PROFILE } from '../../core/constants/portfolio-data';
+import { CONTACT_ENDPOINT, PROFILE } from '../../core/constants/portfolio-data';
 import { RevealOnScrollDirective } from '../../core/directives/reveal-on-scroll.directive';
 import { SectionTitle } from '../../shared/components/section-title/section-title';
 import { SocialLinks } from '../../shared/components/social-links/social-links';
@@ -25,7 +25,7 @@ export class Contact {
 
   protected readonly profile = PROFILE;
 
-  protected readonly toast = signal<'idle' | 'success'>('idle');
+  protected readonly toast = signal<'idle' | 'success' | 'error'>('idle');
   protected readonly submitting = signal(false);
 
   protected readonly form = this.fb.group({
@@ -60,24 +60,43 @@ export class Contact {
     return !!control && control.invalid && (control.dirty || control.touched);
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
+    if (this.submitting()) return;
 
     this.submitting.set(true);
 
-    // Frontend-only demo: log the payload and simulate a brief network round-trip.
-    // Replace with a real backend (mailer, formspree, etc.) when one is available.
-    console.log('[Contact] Message payload', this.form.getRawValue());
+    try {
+      if (!CONTACT_ENDPOINT) throw new Error('Contact endpoint is not configured');
 
-    setTimeout(() => {
-      this.submitting.set(false);
-      this.toast.set('success');
+      const response = await fetch(CONTACT_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          ...this.form.getRawValue(),
+          _gotcha: this.honeypot, // spam trap: real users leave it empty
+        }),
+      });
+
+      if (!response.ok) throw new Error(`Request failed (${response.status})`);
+
       this.form.reset();
+      this.showToast('success');
+    } catch {
+      this.showToast('error');
+    } finally {
+      this.submitting.set(false);
+    }
+  }
 
-      setTimeout(() => this.toast.set('idle'), 4000);
-    }, 800);
+  /** Hidden field bound in the template; bots tend to fill it in. */
+  protected honeypot = '';
+
+  private showToast(kind: 'success' | 'error'): void {
+    this.toast.set(kind);
+    setTimeout(() => this.toast.set('idle'), 5000);
   }
 }
